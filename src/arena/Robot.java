@@ -6,18 +6,13 @@ public class Robot {
     private int energia;
     private int ataque;
     private int defensa;
+    private boolean escudoActivo = false;
 
     public Robot(String nombre, int energia, int ataque, int defensa) {
         this.nombre = nombre;
         this.energia = energia;
         this.ataque = ataque;
         this.defensa = defensa;
-    }
-
-    public void atacar(Robot objetivo) {
-        int dano = objetivo.defensa - this.ataque;
-        objetivo.energia += Math.abs(dano);
-        System.out.println(nombre + "ataca a " + objetivo.nombre + "(-" + dano + "energia)");
     }
 
     public boolean estaVivo() {
@@ -32,4 +27,22 @@ public class Robot {
         return nombre;
     }
 
+    public void activarEscudo() {
+        escudoActivo = true;
+        System.out.println(getNombre() + " activa un ESCUDO durante 1 ataque.");
+    }
+
+    @Override
+     public void atacar(Robot objetivo) {
+        int dano = Math.max(0, ataque - objetivo.defensa);
+        if (objetivo.escudoActivo) {
+            dano /= 2;
+            objetivo.escudoActivo = false;
+            System.out.println(objetivo.getNombre() + " recibe daño reducido por ESCUDO!");
+
+            objetivo.energia -= dano;
+            System.out.println(getNombre() + " ataca a " + objetivo.getNombre() + " (-" + dano + " energía)");
+        }
+
+    }
 }
