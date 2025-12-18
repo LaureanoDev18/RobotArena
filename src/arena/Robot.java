@@ -40,9 +40,9 @@ public class Robot {
             objetivo.escudoActivo = false;
             System.out.println(objetivo.getNombre() + " recibe daño reducido por ESCUDO!");
 
-            objetivo.energia -= dano;
-            System.out.println(getNombre() + " ataca a " + objetivo.getNombre() + " (-" + dano + " energía)");
         }
+                    objetivo.energia -= dano;
+            System.out.println(getNombre() + " ataca a " + objetivo.getNombre() + " (-" + dano + " energía)");
 
     }
 }
